@@ -20,9 +20,17 @@
         packages = {
           gt = pkgs.buildGoModule {
             pname = "gt";
-            version = "0.6.0";
+            version = "0.8.0";
             src = ./.;
-            vendorHash = "sha256-ripY9vrYgVW8bngAyMLh0LkU/Xx1UUaLgmAA7/EmWQU=";
+            vendorHash = "sha256-N1gMI9gflD6CKmo/RiuBzEeCD+0bUAGSrbm8qaGwR0E=";
+
+            nativeBuildInputs = [ pkgs.pkg-config ];
+            buildInputs = [ pkgs.icu ];
+
+            ldflags = [
+              "-X github.com/steveyegge/gastown/internal/cmd.Build=nix"
+              "-X github.com/steveyegge/gastown/internal/cmd.BuiltProperly=1"
+            ];
 
             subPackages = [ "cmd/gt" ];
 
